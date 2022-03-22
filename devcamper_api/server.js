@@ -1,20 +1,12 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
-const { sequelize } = require('./models');
+const connectDB = require('./config/db');
 
 dotenv.config({ path: './config/config.env' });
 
-// Connect db
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log('MYSQL DATABASE connect success'.cyan.underline.bold);
-  })
-  .catch((err) => {
-    console.log(`Error: ${err.message}`.red);
-    server.close(() => process.exit(1));
-  });
+// Connect to database
+connectDB();
 
 // Route file
 const bootcamps = require('./routes/bootcamps');
@@ -40,7 +32,7 @@ const server = app.listen(
   )
 );
 
-// Handle unhandle promise rejections
+// Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
   console.log(`Error: ${err.message}`.red);
 
