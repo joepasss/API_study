@@ -1,4 +1,8 @@
-.DS_Store
+**/.DS_Store
 /assets
 
 /nodehttp/node_modules
+
+/devcamper_api/_data
+/devcamper_api/config/config.env
+/devcamper_api/node_modules
